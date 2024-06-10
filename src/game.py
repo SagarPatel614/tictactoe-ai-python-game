@@ -1,12 +1,14 @@
 import pygame
 from src.constants import *
+from src.board import Board
 
 
 class Game:
     def __init__(self, screen: pygame.Surface):
         self.screen = screen
         self.show_lines()
-        # self.board = Board()
+        self.board = Board()
+        self.player = 1
 
     def show_lines(self):
         # Vertical lines
