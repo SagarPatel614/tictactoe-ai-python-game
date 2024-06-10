@@ -10,4 +10,6 @@ class Board:
     def mark_square(self, row, col, player):
         self.squares[row][col] = player
 
+    def is_empty_sqr(self, row, col):
+        return self.squares[row][col] == 0
 

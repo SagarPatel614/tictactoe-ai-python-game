@@ -18,3 +18,7 @@ class Game:
         # Horizontal lines
         pygame.draw.line(self.screen, LINE_COLOR, (0, SQSIZE), (WIDTH, SQSIZE), LINE_WIDTH)
         pygame.draw.line(self.screen, LINE_COLOR, (0, HEIGHT - SQSIZE), (WIDTH, HEIGHT - SQSIZE), LINE_WIDTH)
+
+    def next_turn(self):
+        self.player = self.player % 2 + 1
+
