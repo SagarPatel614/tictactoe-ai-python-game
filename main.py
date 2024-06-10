@@ -1,6 +1,7 @@
 import sys
 import pygame
 from src.constants import *
+from src.game import Game
 
 
 # PYGAME Setup
@@ -12,6 +13,9 @@ screen.fill(BG_COLOR)
 
 # Main Game Loop
 def main():
+    # Game object
+    game = Game(screen)
+
     while True:
         for event in pygame.event.get():
             # Exit Game
