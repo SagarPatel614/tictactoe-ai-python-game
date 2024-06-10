@@ -30,6 +30,7 @@ def main():
                 col = pos[0] // SQSIZE
                 if board.is_empty_sqr(row, col):
                     board.mark_square(row, col, game.player)
+                    game.draw_fig(row, col)
                     game.next_turn()
 
         pygame.display.update()

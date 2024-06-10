@@ -8,7 +8,7 @@ class Game:
         self.screen = screen
         self.show_lines()
         self.board = Board()
-        self.player = 1
+        self.player = 1  # 1 - X, 2 - O
 
     def show_lines(self):
         # Vertical lines
@@ -21,4 +21,21 @@ class Game:
 
     def next_turn(self):
         self.player = self.player % 2 + 1
+
+    def draw_fig(self, row, col):
+        if self.player == 1:
+            # draw X
+            # descending line
+            start_desc = (col * SQSIZE + OFFSET, row * SQSIZE + OFFSET)
+            end_desc = (col * SQSIZE + SQSIZE - OFFSET, row * SQSIZE + SQSIZE - OFFSET)
+            pygame.draw.line(self.screen, CROSS_COLOR, start_desc, end_desc, CROSS_WIDTH)
+
+            # ascending line
+            start_asc = (col * SQSIZE + OFFSET, row * SQSIZE + SQSIZE - OFFSET)
+            end_asc = (col * SQSIZE + SQSIZE - OFFSET, row * SQSIZE + OFFSET)
+            pygame.draw.line(self.screen, CROSS_COLOR, start_asc, end_asc, CROSS_WIDTH)
+        elif self.player == 2:
+            # draw O
+            center = (col * SQSIZE + SQSIZE // 2, row * SQSIZE + SQSIZE // 2)
+            pygame.draw.circle(self.screen, CIRCLE_COLOR, center, RADIUS, CIRCLE_WIDTH)
 
