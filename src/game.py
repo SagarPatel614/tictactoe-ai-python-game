@@ -16,6 +16,8 @@ class Game:
         self.show_lines()
 
     def show_lines(self):
+        # bg
+        self.screen.fill(BG_COLOR)
         # Vertical lines
         pygame.draw.line(self.screen, LINE_COLOR, (SQSIZE, 0), (SQSIZE, HEIGHT), LINE_WIDTH)
         pygame.draw.line(self.screen, LINE_COLOR, (WIDTH - SQSIZE, 0), (WIDTH - SQSIZE, HEIGHT), LINE_WIDTH)
@@ -48,3 +50,9 @@ class Game:
         self.board.mark_square(row, col, self.player)
         self.draw_fig(row, col)
         self.next_turn()
+
+    def change_game_mode(self):
+        self.game_mode = 'pvp' if self.game_mode == 'ai' else 'ai'
+
+    def reset(self):
+        self.__init__(self.screen)

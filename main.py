@@ -25,12 +25,29 @@ def main():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
+            elif event.type == pygame.MOUSEBUTTONDOWN:
                 pos = event.pos
                 row = pos[1] // SQSIZE
                 col = pos[0] // SQSIZE
                 if board.is_empty_sqr(row, col):
                     game.play_move(row, col)
+            elif event.type == pygame.KEYDOWN:
+                # g - Game mode
+                if event.key == pygame.K_g:
+                    game.change_game_mode()
+                # 0 - Random mode
+                elif event.key == pygame.K_0:
+                    ai.level = 0
+
+                # 1 - AI mode
+                elif event.key == pygame.K_1:
+                    ai.level = 1
+
+                # restart
+                elif event.key == pygame.K_r:
+                    game.reset()
+                    board = game.board
+                    ai = game.ai
 
         if game.game_mode == 'ai' and game.player == ai.player:
             # update the screen
