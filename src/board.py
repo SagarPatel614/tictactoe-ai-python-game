@@ -36,7 +36,7 @@ class Board:
         :return:
             0 - if there is no win yet
             1 - if player 1 wins
-            2 - if player 2 wins
+            -1 - if player 2 wins
         """
         # vertical wins
         for col in range(COLS):
