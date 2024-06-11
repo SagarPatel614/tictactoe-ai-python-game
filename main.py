@@ -25,12 +25,6 @@ def main():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            elif event.type == pygame.MOUSEBUTTONDOWN:
-                pos = event.pos
-                row = pos[1] // SQSIZE
-                col = pos[0] // SQSIZE
-                if board.is_empty_sqr(row, col):
-                    game.play_move(row, col)
             elif event.type == pygame.KEYDOWN:
                 # g - Game mode
                 if event.key == pygame.K_g:
@@ -48,14 +42,25 @@ def main():
                     game.reset()
                     board = game.board
                     ai = game.ai
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                pos = event.pos
+                row = pos[1] // SQSIZE
+                col = pos[0] // SQSIZE
+                if board.is_empty_sqr(row, col) and game.running:
+                    game.play_move(row, col)
 
-        if game.game_mode == 'ai' and game.player == ai.player:
+                    if game.is_over():
+                        game.running = False
+
+        if game.game_mode == 'ai' and game.player == ai.player and game.running:
             # update the screen
             pygame.display.update()
 
             # AI methods
             row, col = ai.eval(board)
             game.play_move(row, col)
+            if game.is_over():
+                game.running = False
 
         pygame.display.update()
 

@@ -56,3 +56,6 @@ class Game:
 
     def reset(self):
         self.__init__(self.screen)
+
+    def is_over(self):
+        return self.board.final_state() != 0 or self.board.is_full()
