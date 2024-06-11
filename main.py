@@ -16,6 +16,7 @@ def main():
     # Game object
     game = Game(screen)
     board = game.board
+    ai = game.ai
 
     # Main game loop
     while True:
@@ -29,11 +30,18 @@ def main():
                 row = pos[1] // SQSIZE
                 col = pos[0] // SQSIZE
                 if board.is_empty_sqr(row, col):
-                    board.mark_square(row, col, game.player)
-                    game.draw_fig(row, col)
-                    game.next_turn()
+                    game.play_move(row, col)
+
+        if game.game_mode == 'ai' and game.player == ai.player:
+            # update the screen
+            pygame.display.update()
+
+            # AI methods
+            row, col = ai.eval(board)
+            game.play_move(row, col)
 
         pygame.display.update()
 
 
+# Entry point for the main program
 main()

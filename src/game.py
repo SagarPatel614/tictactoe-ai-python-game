@@ -1,6 +1,7 @@
 import pygame
 from src.constants import *
 from src.board import Board
+from src.ai import AI
 
 
 class Game:
@@ -8,7 +9,7 @@ class Game:
         self.screen = screen
         self.board = Board()
         self.player = 1  # 1 - X, 2 - O
-        # self.ai = AI()
+        self.ai = AI()
         self.game_mode = 'pvp' # | 'ai
         self.running = True
 
@@ -43,3 +44,7 @@ class Game:
             center = (col * SQSIZE + SQSIZE // 2, row * SQSIZE + SQSIZE // 2)
             pygame.draw.circle(self.screen, CIRCLE_COLOR, center, RADIUS, CIRCLE_WIDTH)
 
+    def play_move(self, row, col):
+        self.board.mark_square(row, col, self.player)
+        self.draw_fig(row, col)
+        self.next_turn()
