@@ -50,6 +50,7 @@ def main():
                     game.play_move(row, col)
 
                     if game.is_over():
+                        game.show_end()
                         game.running = False
 
         if game.game_mode == 'ai' and game.player == ai.player and game.running:
@@ -60,6 +61,7 @@ def main():
             row, col = ai.eval(board)
             game.play_move(row, col)
             if game.is_over():
+                game.show_end()
                 game.running = False
 
         pygame.display.update()

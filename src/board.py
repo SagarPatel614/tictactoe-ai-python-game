@@ -8,6 +8,9 @@ class Board:
         self.squares = np.zeros((ROWS, COLS))
         self.empty_squares = self.squares
         self.marked_squares = 0
+        self.win_pos = None
+        self.win_line = ''  # 'v' | 'h' | 'asc' | 'desc' (Vertical | Horizontal | Ascending | Descending)
+        self.win_player = 0
 
     def mark_square(self, row, col, player):
         self.squares[row][col] = player
@@ -41,17 +44,29 @@ class Board:
         # vertical wins
         for col in range(COLS):
             if self.squares[0][col] == self.squares[1][col] == self.squares[2][col] != 0:
+                self.win_pos = (0, col)
+                self.win_line = 'v'
+                self.win_player = self.squares[0][col]
                 return self.squares[0][col]
 
         # horizontal wins
         for row in range(ROWS):
             if self.squares[row][0] == self.squares[row][1] == self.squares[row][2] != 0:
+                self.win_pos = (row, 0)
+                self.win_line = 'h'
+                self.win_player = self.squares[row][0]
                 return self.squares[row][0]
 
         # diagonal wins
         if self.squares[0][0] == self.squares[1][1] == self.squares[2][2] != 0:
+            self.win_pos = (1, 1)
+            self.win_line = 'desc'
+            self.win_player = self.squares[1][1]
             return self.squares[1][1]
         if self.squares[2][0] == self.squares[1][1] == self.squares[0][2] != 0:
+            self.win_pos = (1, 1)
+            self.win_line = 'asc'
+            self.win_player = self.squares[1][1]
             return self.squares[1][1]
 
         # No wins yet

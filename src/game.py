@@ -59,3 +59,25 @@ class Game:
 
     def is_over(self):
         return self.board.final_state() != 0 or self.board.is_full()
+
+    def show_end(self):
+        color = CIRCLE_COLOR if self.board.win_player == -1 else CROSS_COLOR
+        if self.board.win_line == 'v':
+            row, col = self.board.win_pos
+            i_pos = (col * SQSIZE + SQSIZE // 2, 20)
+            f_pos = (col * SQSIZE + SQSIZE // 2, HEIGHT - 20)
+            pygame.draw.line(self.screen, color, i_pos, f_pos, LINE_WIDTH)
+        elif self.board.win_line == 'h':
+            row, col = self.board.win_pos
+            i_pos = (20, row * SQSIZE + SQSIZE // 2)
+            f_pos = (WIDTH - 20, row * SQSIZE + SQSIZE // 2)
+            pygame.draw.line(self.screen, color, i_pos, f_pos, LINE_WIDTH)
+        elif self.board.win_line == 'desc':
+            i_pos = (20, 20)
+            f_pos = (WIDTH - 20, HEIGHT - 20)
+            pygame.draw.line(self.screen, color, i_pos, f_pos, LINE_WIDTH)
+        elif self.board.win_line == 'asc':
+            i_pos = (20, HEIGHT - 20)
+            f_pos = (WIDTH - 20, 20)
+            pygame.draw.line(self.screen, color, i_pos, f_pos, LINE_WIDTH)
+
